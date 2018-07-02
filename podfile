@@ -1,0 +1,12 @@
+platform :ios, ’8.0’
+target ‘OcTplApp’ do
+use_frameworks!
+pod 'Masonry'
+pod 'AFNetworking'
+pod 'MJRefresh', inhibit_warnings: true 
+pod 'IQKeyboardManager'
+pod 'UICKeyChainStore'
+pod 'MBProgressHUD'
+pod 'SDCycleScrollView','~> 1.75', inhibit_warnings: true 
+pod 'YYKit',inhibit_warnings: true 
+end 
