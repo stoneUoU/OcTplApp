@@ -105,21 +105,21 @@ static TabBarVC *tabVC = nil;
     
 }
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    return YES;
-//    if ([[NSString stringWithFormat:@"%@",viewController.tabBarItem.title]  isEqualToString: @"我的"]){
-//        //取是否登录
-//        if (![[NSString stringWithFormat:@"%@",[UICKeyChainStore keyChainStore][@"orLogin"]]  isEqual: @"true"]){
-//            //Mark 弹出登录视图：进app直接点我的tab登录:status_code:2
+    //return YES;
+    if ([[NSString stringWithFormat:@"%@",viewController.tabBarItem.title]  isEqualToString: @"我的"]){
+        //取是否登录
+        if (![[NSString stringWithFormat:@"%@",[UICKeyChainStore keyChainStore][@"orLogin"]]  isEqual: @"true"]){
+            //Mark 弹出登录视图：进app直接点我的tab登录:status_code:2
 //            SmsLoginVC * smsLoginV = [[SmsLoginVC alloc] init];
 //            smsLoginV.pass_Vals = @{@"status_code":@"2"};
 //            [MethodFunc presentToNaviVC:self destVC:smsLoginV animate:YES];
-//            return NO;
-//        }else{
-//            return YES;
-//        }
-//    }else{
-//        return YES;
-//    }
+            return YES;
+        }else{
+            return YES;
+        }
+    }else{
+        return YES;
+    }
 }
 - (UIColor *)randomColor
 {

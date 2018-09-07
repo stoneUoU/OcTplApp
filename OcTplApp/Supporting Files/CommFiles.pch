@@ -13,7 +13,8 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import "Masonry.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <AFNetworking/AFNetworking.h>
+//#import <AFNetworking/AFNetworking.h>
+#import <MacProStore/MacProStore-umbrella.h>
 //下拉刷新库
 #import <MJRefresh/MJRefresh.h>
 //键盘框架
@@ -38,9 +39,11 @@
 //CTMediator路由跳转
 #import "Target_Freshs.h"
 #import "CTMediator+FreshsActions.h"
+#import "MBProgressHUD+ST.h"
 #ifdef __OBJC__
 //添加混淆作用的头文件（这个文件名是脚本confuse.sh中定义的）
 #import "codeObfuscation.h"
+#import "NetWorkManager.h"
 
 #endif
 #endif /* commFiles_pch */

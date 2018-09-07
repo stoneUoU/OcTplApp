@@ -24,6 +24,7 @@
 
 @property (nonatomic ,strong)UITableView *tableV;
 
-@property (nonatomic,copy)NSArray * dataMs;
+//用来存数据
+@property(nonatomic ,strong) NSMutableArray* dataMs;
 
 @end

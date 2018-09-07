@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "TestVC.h"
+#import "TestingVC.h"
 @interface AppDelegate ()
 
 @end
@@ -27,6 +29,7 @@
     if (!remoteUserInfo) {
         self.window.rootViewController = [TabBarVC sharedVC];
         [TabBarVC sharedVC].selectedIndex = 1;
+        //[[TestingVC alloc] init]; 
     }
     [self setNetNotice];
     return YES;

@@ -53,20 +53,9 @@
         /**设置相应的缓存策略*/
         
         self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        
-        /**分别设置请求以及相应的序列化器*/
-        self.requestSerializer = [AFJSONRequestSerializer serializer];
-        
-        /**复杂的参数类型 需要使用json传值-设置请求内容的类型*/
-        
-        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        //此处做为测试 可根据自己应用设置相应的值
-        /**设置apikey ------类似于自己应用中的tokken---此处仅仅作为测试使用*/
-        //[self.requestSerializer setValue:apikey forHTTPHeaderField:@"apikey"];
+
         /**设置接受的类型*/
-        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil,nil];
-        
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil,nil];
     }
     
     return self;
@@ -92,6 +81,10 @@
             
         case HttpRequestTypeGet:
         {
+            /**分别设置请求以及相应的序列化器*/
+            [NetWorkManager shareManager].requestSerializer = [AFJSONRequestSerializer serializer];
+            /**复杂的参数类型 需要使用json传值-设置请求内容的类型*/
+            [[NetWorkManager shareManager].requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             //设置请求头
             [[NetWorkManager shareManager].requestSerializer setValue:Authos forHTTPHeaderField:@"token"];
             /**设置请求超时时间*/
@@ -113,6 +106,10 @@
         case HttpRequestTypePost:
             
         {
+            /**分别设置请求以及相应的序列化器*/
+            [NetWorkManager shareManager].requestSerializer = [AFJSONRequestSerializer serializer];
+            /**复杂的参数类型 需要使用json传值-设置请求内容的类型*/
+            [[NetWorkManager shareManager].requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             //设置请求头
             [[NetWorkManager shareManager].requestSerializer setValue:Authos forHTTPHeaderField:@"token"];
             /**设置请求超时时间*/
@@ -129,6 +126,68 @@
                 
             }];
         }
+            
+    }
+    
+}
+
++(void)requestXMLWithType:(HttpRequestType)type withUrlString:(NSString *)urlString withParaments:(id)paraments Authos:(NSString *)Authos withSuccessBlock:(requestSuccess)successBlock withFailureBlock:(requestFailure)failureBlock
+{
+    
+    switch (type) {
+        case HttpRequestTypeGet:
+        {
+            /**复杂的参数类型 需要使用xml传值-设置请求内容的类型*/
+            [[NetWorkManager shareManager].requestSerializer setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
+            //接收xml专用：把这个放在最下面
+            [NetWorkManager shareManager].responseSerializer = [AFXMLParserResponseSerializer serializer];
+            //设置请求头
+            [[NetWorkManager shareManager].requestSerializer setValue:Authos forHTTPHeaderField:@"token"];
+            /**设置请求超时时间*/
+            [[NetWorkManager shareManager].requestSerializer setTimeoutInterval:timeoutTime];
+            [[NetWorkManager shareManager] GET:urlString parameters:paraments success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                if([responseObject isKindOfClass:[NSData class]]){   //根据后台返回的数据类型进行判断，若为NSData，则转成NSDict
+                    successBlock([NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil]);
+                }else{
+                    successBlock(responseObject);
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+                failureBlock(error);
+            }];
+
+            break;
+        }
+        case HttpRequestTypePost:
+        {
+            /**复杂的参数类型 需要使用xml传值-设置请求内容的类型*/
+            [[NetWorkManager shareManager].requestSerializer setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
+            //接收xml专用：把这个放在最下面
+            [NetWorkManager shareManager].responseSerializer = [AFXMLParserResponseSerializer serializer];
+            //设置请求头
+            [[NetWorkManager shareManager].requestSerializer setValue:Authos forHTTPHeaderField:@"token"];
+            /**设置请求超时时间*/
+            [[NetWorkManager shareManager].requestSerializer setTimeoutInterval:timeoutTime];
+            // 设置HTTPBody,这个是重点哈
+            [[NetWorkManager shareManager].requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
+                return paraments;
+            }];
+            [[NetWorkManager shareManager] POST:urlString parameters:paraments success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                if([responseObject isKindOfClass:[NSData class]]){   //根据后台返回的数据类型进行判断，若为NSData，则转成NSDict
+                    successBlock([NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil]);
+                }else{
+                    successBlock(responseObject);
+                }
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+                failureBlock(error);
+                
+            }];
+            break;
+        }
+        default:
+            break;
+            
             
     }
     

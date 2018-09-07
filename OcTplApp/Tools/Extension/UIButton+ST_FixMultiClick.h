@@ -14,6 +14,6 @@
 
 @property (nonatomic, assign) NSTimeInterval st_acceptEventTime;
 
-- (void)adjustToSize:(CGSize)size;   //调整按钮点击范围
+- (void)st_MatchClickArea:(CGSize)size;
 
 @end

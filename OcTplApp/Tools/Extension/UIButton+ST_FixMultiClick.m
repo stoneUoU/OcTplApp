@@ -71,7 +71,7 @@ static const char *UIControl_acceptEventTime = "UIControl_acceptEventTime";
     [self st_sendAction:action to:target forEvent:event];
 }
 
-- (void)adjustToSize:(CGSize)size
+- (void)st_MatchClickArea:(CGSize)size
 {
     CGRect previousFrame = self.frame;
     CGRect newFrame = self.frame;

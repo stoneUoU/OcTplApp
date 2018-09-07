@@ -45,6 +45,17 @@ typedef void(^requestFailure)( NSError *error);
  */
 +(void)requestWithType:(HttpRequestType)type withUrlString:(NSString *)urlString withParaments:(id)paraments Authos:(NSString *)Authos withSuccessBlock:( requestSuccess)successBlock withFailureBlock:( requestFailure)failureBlock;
 
+/**
+ *  发送xml格式的数据
+ *
+ *  @param type         get / post
+ *  @param urlString    请求的地址
+ *  @param paraments    请求的参数
+ *  @param successBlock 请求成功的回调
+ *  @param failureBlock 请求失败的回调
+ */
+
++(void)requestXMLWithType:(HttpRequestType)type withUrlString:(NSString *)urlString withParaments:(id)paraments Authos:(NSString *)Authos withSuccessBlock:(requestSuccess)successBlock withFailureBlock:(requestFailure)failureBlock;
 
 +(void)cancelAllRequest;
 /**

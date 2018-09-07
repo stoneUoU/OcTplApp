@@ -47,7 +47,7 @@
         make.width.mas_equalTo(ScreenW);
     }];
     //[MGJRouter openURL:@"mgj://market/detail?id=7&&demoID=林磊"];
-    //[MGJRouter openURL:@"mgj://market/demo" withUserInfo:@{@"user_name": @"林磊"} completion:nil];
+    [MGJRouter openURL:@"mgj://market/demo" withUserInfo:@{@"user_name": @"林磊"} completion:nil];
     STLog(@"%@",_pass_vals[@"林磊"]);
 }
 

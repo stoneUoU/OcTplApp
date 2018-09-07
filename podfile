@@ -1,8 +1,11 @@
+# 下面两行是指明依赖库的来源地址
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/stoneUoU/MacPro_Spec.git'
 platform :ios, ’8.0’
 target ‘OcTplApp’ do
 use_frameworks!
 pod 'Masonry'
-pod 'AFNetworking'
+pod 'MacProStore'
 pod 'MJRefresh', inhibit_warnings: true 
 pod 'IQKeyboardManager'
 pod 'UICKeyChainStore'

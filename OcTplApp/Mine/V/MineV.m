@@ -9,11 +9,11 @@
 #import "MineV.h"
 
 @implementation MineV
-- (id)init
+- (instancetype)init
 {
     self = [super init];
-    if(self){
-        _dataMs = [NSArray arrayWithObjects:@"MGJRouter测试",@"CTMediator测试",@"GCD",@"Runtime",@"内存管理",@"RunLoop基础知识",@"NSOperation", nil];
+    if (self) {
+        _dataMs = [NSMutableArray array];
     }
     return self;
 }
@@ -80,7 +80,6 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return [_dataMs count];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -104,7 +103,7 @@
         Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"uITableViewCell"];
     }
     Cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    Cell.textLabel.text = _dataMs[indexPath.row];
+    Cell.textLabel.text = [NSString stringWithFormat:@"%@",_dataMs[indexPath.row]];
     return Cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

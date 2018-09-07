@@ -41,7 +41,7 @@
     _backBtn = [[UIButton alloc] init];
     [_backBtn setImage:[UIImage imageNamed:backIvName]forState:UIControlStateNormal];
     [_backBtn addTarget:self action:@selector(toBack)forControlEvents:UIControlEventTouchUpInside];
-    [_backBtn adjustToSize:CGSizeMake(2*spaceM,0)];
+    [_backBtn st_MatchClickArea:CGSizeMake(2*spaceM,0)];
     [_navBarV addSubview:_backBtn];
     
     _sideBtn = [[UIButton alloc] init];
@@ -50,7 +50,7 @@
     [_sideBtn setTitle:sideVal forState:UIControlStateNormal];
     [_sideBtn setTitleColor:sideFontC  forState:UIControlStateNormal];
     [_sideBtn addTarget:self action:@selector(toSide)forControlEvents:UIControlEventTouchUpInside];
-    [_sideBtn adjustToSize:CGSizeMake(2*spaceM,0)];
+    [_sideBtn st_MatchClickArea:CGSizeMake(2*spaceM,0)];
     _sideBtn.st_acceptEventInterval = 2;
     [_navBarV addSubview:_sideBtn];
     

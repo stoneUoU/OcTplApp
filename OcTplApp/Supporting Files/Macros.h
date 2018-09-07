@@ -51,8 +51,7 @@
 //#define followRoute @"api/ggshop/member/v3/"
 
 //请求地址：测试环境
-#define GstoreURL  @""
-#define GstoreURL  @""
+#define GstoreURL  @"http://10.10.0.8:5000/"
 #define picUrl @""
 #define followRoute @""
 //定义登录失效的状态码
